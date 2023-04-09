@@ -10,9 +10,10 @@ Using devcontainer in WSL2 on latest Windows 11 - cypress will open GUI with no 
 yarn cy:open
 ```
 
-Running tests (without GUI)
+Running tests (without GUI) and view report
 ```
 TARGET_APP=reactfnd yarn run test
+TARGET_APP=reactfnd yarn run report
 ```
 
 # Running React

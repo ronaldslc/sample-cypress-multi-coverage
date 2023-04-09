@@ -2,14 +2,12 @@
   "private": true,
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "CYPRESS_CONFIG=./cypress/configs/$TARGET_APP.config.js && cypress run --config-file $CYPRESS_CONFIG",
-    "cy:run:coverage": "nyc yarn run cy:run",
-    "pretest": "rimraf .nyc_output .cache coverage dist",
-    "start": "CYPRESS_CONFIG=./cypress/configs/$TARGET_APP.config.js START_COMMAND=`node -p \"require('$CYPRESS_CONFIG').startCommand\"` && cd ./$TARGET_APP && BROWSER=none $START_COMMAND",
-    "test": "CYPRESS_CONFIG=./cypress/configs/$TARGET_APP.config.js BASE_URL=`node -p \"require('$CYPRESS_CONFIG').e2e.baseUrl\"` && start-server-and-test start $BASE_URL cy:run",
-    "test:coverage": "CYPRESS_CONFIG=./cypress/configs/$TARGET_APP.config.js BASE_URL=`node -p \"require('$CYPRESS_CONFIG').e2e.baseUrl\"` && start-server-and-test start $BASE_URL cy:run:coverage",
-    "test:watch": "CYPRESS_CONFIG=./cypress/configs/$TARGET_APP.config.js yarn run cypress open --config-file $CYPRESS_CONFIG",
-    "instrument": "cp -r ./$TARGET_APP/src instrumented && nyc instrument --compact false ./$TARGET_APP/src instrumented"
+    "cy:run": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js && cypress run --config-file $CYPRESS_CONFIG",
+    "pretest": "rimraf ./$TARGET_APP/.nyc_output ./$TARGET_APP/coverage",
+    "start": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js START_COMMAND=`node -p \"require('$CYPRESS_CONFIG').startCommand\"` && cd ./$TARGET_APP && BROWSER=none $START_COMMAND",
+    "test": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js BASE_URL=`node -p \"require('$CYPRESS_CONFIG').e2e.baseUrl\"` && start-server-and-test start $BASE_URL cy:run",
+    "test:watch": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js && yarn run cypress open --config-file $CYPRESS_CONFIG",
+    "report": "cd ./$TARGET_APP && nyc report"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.3",

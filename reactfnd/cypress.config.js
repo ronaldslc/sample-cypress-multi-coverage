@@ -10,7 +10,7 @@ module.exports = defineConfig({
   startCommand: 'yarn start',
   e2e: {
     setupNodeEvents(on, config) {
-      return require('../plugins/index.js')(on, config)
+      return require('../cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/reactfnd/**/*',
