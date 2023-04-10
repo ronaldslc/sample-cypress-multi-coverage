@@ -1,17 +1,12 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-  component: {
-    devServer: {
-      framework: 'create-react-app',
-      bundler: 'webpack',
-    },
-  },
-  startCommand: 'yarn dev',
+  startCommand: 'yarn start:coverage',
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:8000',
+    specPattern: 'cypress/e2e/angularjsfnd/**/*',
   },
 })
