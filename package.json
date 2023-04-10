@@ -7,7 +7,10 @@
     "start": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js START_COMMAND=`node -p \"require('$CYPRESS_CONFIG').startCommand\"` && cd ./$TARGET_APP && BROWSER=none $START_COMMAND",
     "test": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js BASE_URL=`node -p \"require('$CYPRESS_CONFIG').e2e.baseUrl\"` && start-server-and-test start $BASE_URL cy:run",
     "test:watch": "CYPRESS_CONFIG=./$TARGET_APP/cypress.config.js && yarn run cypress open --config-file $CYPRESS_CONFIG",
-    "report": "cd ./$TARGET_APP && nyc report"
+    "test:all": "TARGET_APP=reactfnd yarn run test && TARGET_APP=angularjsfnd yarn run test",
+    "report": "cd ./$TARGET_APP && nyc report",
+    "prereport:aggregate": "rimraf .nyc_output coverage",
+    "report:aggregate": "mkdir -p .nyc_output && cp angularjsfnd/.nyc_output/out.json .nyc_output/angularjsfnd.json && cp reactfnd/.nyc_output/out.json .nyc_output/reactfnd.json && nyc report --reporter lcov"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.3",
